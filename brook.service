@@ -1,0 +1,15 @@
+[Unit]
+Description=Brook Service
+After=network.service
+
+[Service]
+#Type=forking
+WorkingDirectory=/root
+ExecStart=/usr/bin/nohup /root/brook socks5 --socks5 0.0.0.0:1080 >/dev/null 2>&1 &
+#SuccessExitStatus=143
+ExecStop=/usr/bin/kill -9 $MAINPID
+Environment=HOME=/home/hxcl PWD=/home/hxcl/app
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
